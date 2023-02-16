@@ -29,7 +29,7 @@ const Jumbo = () => {
                 height="150"
                 className="jumbo-logo"
               />
-              <p class="text-primary mb-5 fs-5">vendevehiculos.com</p>
+              <p className="text-primary mb-5 fs-5">vendevehiculos.com</p>
             </div>
             <h3 className="m-0"></h3>
           </div>
