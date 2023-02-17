@@ -11,30 +11,17 @@ import { FaUserAlt } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import SignUpModal from "./signin-modals/SignUpModal";
 
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithRedirect,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
-import { auth } from "../firebaseconfig";
-
 function Navbarmain() {
   const [modalShowSignUP, setModalShowSignUP] = React.useState(false);
-
-  function handllelogin() {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider);
-    console.log("se undio botton de login...");
-    console.log(signInWithPopup);
-  }
+  const [user, setuser] = React.useState({});
 
   return (
     <>
       <SignUpModal
         show={modalShowSignUP}
         onHide={() => setModalShowSignUP(false)}
+        user={user}
+        setuser={setuser}
       />
 
       <Navbar key="md" bg="light" expand="md" className="mb-3">
@@ -140,9 +127,13 @@ function Navbarmain() {
                 variant="light"
                 onClick={() => setModalShowSignUP(true)}
               >
-                <span className="text-secondary">
-                  Ingresar <FaUserAlt />
-                </span>
+                {user ? (
+                  <span className="text-secondary">{user.displayName}</span>
+                ) : (
+                  <span className="text-secondary">
+                    Ingresar <FaUserAlt />
+                  </span>
+                )}
               </Button>
             </Offcanvas.Body>
           </Navbar.Offcanvas>

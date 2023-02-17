@@ -13,7 +13,7 @@ const Jumbo = () => {
             <span className="text-primary h1">_______</span>
             <div className="row mt-3">
               <div className="col-5 ">
-                <p class="fst-italic text-white mb-5 fs-5">
+                <p className="fst-italic text-white mb-5 fs-5">
                   "Vende tu vehículo sin complicaciones: publica, recibe ofertas
                   y gestiona tus ventas en un solo lugar"
                 </p>
@@ -31,7 +31,6 @@ const Jumbo = () => {
               />
               <p className="text-primary mb-5 fs-5">vendevehiculos.com</p>
             </div>
-            <h3 className="m-0"></h3>
           </div>
         </div>
       </Container>
