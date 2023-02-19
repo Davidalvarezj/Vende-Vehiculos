@@ -14,8 +14,8 @@ const Jumbo = () => {
             <div className="row mt-3">
               <div className="col-5 ">
                 <p className="fst-italic text-white mb-5 fs-5">
-                  "Vende tu vehículo sin complicaciones: publica, recibe ofertas
-                  y gestiona tus ventas en un solo lugar"
+                  "Publica, recibe ofertas y gestiona tus ventas en un solo
+                  lugar"
                 </p>
               </div>
             </div>

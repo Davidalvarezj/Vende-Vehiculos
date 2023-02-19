@@ -13,7 +13,7 @@ const Footer = () => {
             <span className="text-primary h1">_______</span>
             <div className="row mt-3">
               <div className="col-5 ">
-                <p class="fst-italic text-white mb-5 fs-5"></p>
+                <p className="fst-italic text-white mb-5 fs-5"></p>
               </div>
             </div>
           </Col>
@@ -26,7 +26,7 @@ const Footer = () => {
                 height="150"
                 className="jumbo-logo"
               />
-              <p class="text-primary mb-5 fs-5">vendevehiculos.com</p>
+              <p className="text-primary mb-5 fs-5">vendevehiculos.com</p>
             </div>
             <h3 className="m-0"></h3>
           </div>

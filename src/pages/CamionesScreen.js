@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import SideFilter from "../components/SideFilter";
 
-export default function CarsScreen() {
+export default function CamionesScreen() {
   return (
     <>
       <SideFilter />
@@ -12,7 +12,7 @@ export default function CarsScreen() {
         <div className="row">
           <div className="col-4"></div>
           <div className="col-8">
-            <div>Car Screen</div>
+            <div>Camiones Screen</div>
             <Row xs={1} md={3} className="g-4">
               {Array.from({ length: 9 }).map((_, idx) => (
                 <Col>

@@ -6,6 +6,9 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../features/userSlice";
+import { useEffect } from "react";
 import Logo from "../img/Logo3.png";
 import { FaUserAlt } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
@@ -14,6 +17,13 @@ import SignUpModal from "./signin-modals/SignUpModal";
 function Navbarmain() {
   const [modalShowSignUP, setModalShowSignUP] = React.useState(false);
   const [user, setuser] = React.useState({});
+  const dispatch = useDispatch();
+  const userStore = useSelector((state) => state.user.userAuth);
+  console.log("userStore: ", userStore);
+
+  useEffect(() => {
+    dispatch(addUser(user));
+  }, [user]);
 
   return (
     <>
@@ -48,20 +58,22 @@ function Navbarmain() {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <Nav.Link href="#action1">Publicar</Nav.Link>
+                <NavLink className="nav-link" to="/publicar">
+                  Publicar
+                </NavLink>
                 <NavDropdown
                   title="Carros"
                   id={`offcanvasNavbarDropdown-expand-md`}
                 >
                   <NavDropdown.Item href="#action3">
-                    <NavLink className="nav-link" to="/cars">
+                    <NavLink className="nav-link" to="/carros">
                       Automóvil
                     </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action4">Camioneta</NavDropdown.Item>
                   <NavDropdown.Item href="#action5">Pick-Up</NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action5">
+                  <NavDropdown.Item href="#action6">
                     Buscar por Marca
                   </NavDropdown.Item>
                 </NavDropdown>
@@ -69,11 +81,16 @@ function Navbarmain() {
                   title="Motos"
                   id={`offcanvasNavbarDropdown-expand-md`}
                 >
-                  <NavDropdown.Item href="#action3">Scooter</NavDropdown.Item>
-                  <NavDropdown.Item href="#action4">Calle</NavDropdown.Item>
-                  <NavDropdown.Item href="#action5">Touring</NavDropdown.Item>
-                  <NavDropdown.Item href="#action6">Off-road</NavDropdown.Item>
                   <NavDropdown.Item href="#action7">
+                    {" "}
+                    <NavLink className="nav-link" to="/motos">
+                      Scooter
+                    </NavLink>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action8">Calle</NavDropdown.Item>
+                  <NavDropdown.Item href="#action9">Touring</NavDropdown.Item>
+                  <NavDropdown.Item href="#action10">Off-road</NavDropdown.Item>
+                  <NavDropdown.Item href="#action11">
                     Cuatrimoto
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
@@ -85,7 +102,12 @@ function Navbarmain() {
                   title="Camiones"
                   id={`offcanvasNavbarDropdown-expand-md`}
                 >
-                  <NavDropdown.Item href="#action3">Volquetas</NavDropdown.Item>
+                  <NavDropdown.Item href="#action3">
+                    {" "}
+                    <NavLink className="nav-link" to="/camiones">
+                      Volquetas
+                    </NavLink>
+                  </NavDropdown.Item>
                   <NavDropdown.Item href="#action4">Buses</NavDropdown.Item>
                   <NavDropdown.Item href="#action4">Camiones</NavDropdown.Item>
                   <NavDropdown.Item href="#action5">
@@ -100,7 +122,12 @@ function Navbarmain() {
                   title="Botes"
                   id={`offcanvasNavbarDropdown-expand-md`}
                 >
-                  <NavDropdown.Item href="#action5">Yates</NavDropdown.Item>
+                  <NavDropdown.Item href="#action5">
+                    {" "}
+                    <NavLink className="nav-link" to="/account">
+                      Yates
+                    </NavLink>
+                  </NavDropdown.Item>
                   <NavDropdown.Item href="#action3">Lanchas</NavDropdown.Item>
                   <NavDropdown.Item href="#action4">Veleros</NavDropdown.Item>
                   <NavDropdown.Item href="#action5">
@@ -128,7 +155,9 @@ function Navbarmain() {
                 onClick={() => setModalShowSignUP(true)}
               >
                 {user ? (
-                  <span className="text-secondary">{user.displayName}</span>
+                  <span className="text-secondary">
+                    {user.displayName ? user.displayName : user.email}
+                  </span>
                 ) : (
                   <span className="text-secondary">
                     Ingresar <FaUserAlt />

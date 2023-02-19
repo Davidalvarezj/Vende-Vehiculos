@@ -3,8 +3,10 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import GoogleButton from "react-google-button";
 import { FaUserAlt } from "react-icons/fa";
-import { useEffect } from "react";
+import { GiPartyPopper } from "react-icons/gi";
 import Form from "react-bootstrap/Form";
+
+import { useState, useEffect } from "react";
 import {
   GoogleAuthProvider,
   signInWithPopup,
@@ -14,20 +16,26 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../../firebaseconfig";
+import { auth } from "../../firebaseconf";
 
 const SignUpModal = (props) => {
-  const [showloginform, setShowloginform] = React.useState(false);
-  const [showSuccesAuth, setShowSuccesAuth] = React.useState(false);
-  const [showregisteredform, setShowregisteredform] = React.useState(false);
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [errorNewlogin, setErrorNewlogin] = React.useState(null);
+  const [showloginform, setShowloginform] = useState(false);
+  const [showSuccesAuth, setShowSuccesAuth] = useState(false);
+  const [showregisteredform, setShowregisteredform] = useState(false);
+  const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [errorNewlogin, setErrorNewlogin] = useState(null);
+  const [registeredEmail, setRegisteredEmail] = useState("");
+  const [registeredPassword, setRegisteredPassword] = useState("");
+  const [errorRegisteredlogin, setErrorRegisteredlogin] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       props.setuser(currentUser);
       console.log("currentUser", currentUser);
+      if (currentUser) {
+        setShowSuccesAuth(true);
+      }
     });
     return () => {
       unsubscribe();
@@ -37,6 +45,7 @@ const SignUpModal = (props) => {
     setShowloginform(false);
     setShowregisteredform(false);
     setErrorNewlogin(null);
+    setErrorRegisteredlogin(null);
   }, [props.show]);
 
   const logOut = async () => {
@@ -70,14 +79,30 @@ const SignUpModal = (props) => {
     }
   }
 
+  async function handlleSignInAllreadyRegistered(e) {
+    e.preventDefault();
+    try {
+      const response = await signInWithEmailAndPassword(
+        auth,
+        registeredEmail,
+        registeredPassword
+      );
+      console.log("Se aprovo la Auth...", response);
+      setShowSuccesAuth(true);
+    } catch (error) {
+      console.log("Error en la Autht, ", error);
+      setErrorRegisteredlogin(error.message);
+    }
+  }
+
   async function newUserCreation(e) {
     e.preventDefault();
-    console.log("Inicio creacion de usuario...", email, password);
+    console.log("Inicio creacion de usuario...", newEmail, newPassword);
     try {
       const response = await createUserWithEmailAndPassword(
         auth,
-        email,
-        password
+        newEmail,
+        newPassword
       );
       console.log("Se aprovo nuevo usuario. ", response);
       setShowSuccesAuth(true);
@@ -101,11 +126,21 @@ const SignUpModal = (props) => {
         {showSuccesAuth ? (
           <div className="container">
             <div className="row mb-3">
+              <h1 className="text-sm-center">
+                <GiPartyPopper />
+              </h1>
+
               <h3 className="mt-4 text-sm-center">Bienvenido!</h3>
-              <h6 className="mt-2 text-sm-center">{props.user?.displayName}</h6>
+              <h6 className="mt-2 text-sm-center">
+                {" "}
+                {props.user?.displayName
+                  ? props.user.displayName
+                  : props.user.email}
+              </h6>
+
               <p className="mt-5 mb-5">
                 Acabas de desbloquear todas las herramientas que necesitarás
-                para que comprar y vender un auto sea más fácil que nunca.
+                para que comprar y vender un vehículo sea más fácil que nunca.
               </p>
             </div>
             <div className="row m-3 mt-2">
@@ -130,16 +165,25 @@ const SignUpModal = (props) => {
               </p>
             </div>
             {showregisteredform ? (
-              <Form className="mb-5">
+              <Form className="mb-5" onSubmit={handlleSignInAllreadyRegistered}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label>Email:</Form.Label>
-                  <Form.Control type="email" placeholder="Enter email" />
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
+                    onChange={(e) => setRegisteredEmail(e.target.value)}
+                  />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label>Contraseña:</Form.Label>
-                  <Form.Control type="password" placeholder="Password" />
+                  <Form.Control
+                    type="password"
+                    placeholder="Password"
+                    onChange={(e) => setRegisteredPassword(e.target.value)}
+                  />
                 </Form.Group>
+                <p className="mt-2 text-danger">{errorRegisteredlogin}</p>
                 <Button variant="success" type="submit">
                   Iniciar Sesión
                 </Button>
@@ -154,7 +198,7 @@ const SignUpModal = (props) => {
                   <Form.Control
                     type="email"
                     placeholder="Enter email"
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setNewEmail(e.target.value)}
                   />
                 </Form.Group>
 
@@ -163,7 +207,7 @@ const SignUpModal = (props) => {
                   <Form.Control
                     type="password"
                     placeholder="Password"
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => setNewPassword(e.target.value)}
                   />
                 </Form.Group>
                 <p className="mt-2 text-danger">{errorNewlogin}</p>
