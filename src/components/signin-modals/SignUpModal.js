@@ -41,12 +41,20 @@ const SignUpModal = (props) => {
       unsubscribe();
     };
   }, []);
+
   useEffect(() => {
     setShowloginform(false);
     setShowregisteredform(false);
     setErrorNewlogin(null);
     setErrorRegisteredlogin(null);
   }, [props.show]);
+
+  useEffect(() => {
+    if (props.logoutrun) {
+      logOut();
+      props.setLogoutrun(false);
+    }
+  }, [props.logoutrun]);
 
   const logOut = async () => {
     console.log("Loggin OUT...");
@@ -135,7 +143,7 @@ const SignUpModal = (props) => {
                 {" "}
                 {props.user?.displayName
                   ? props.user.displayName
-                  : props.user.email}
+                  : props.user?.email}
               </h6>
 
               <p className="mt-5 mb-5">

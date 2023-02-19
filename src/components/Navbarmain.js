@@ -17,6 +17,7 @@ import SignUpModal from "./signin-modals/SignUpModal";
 function Navbarmain() {
   const [modalShowSignUP, setModalShowSignUP] = React.useState(false);
   const [user, setuser] = React.useState({});
+  const [logoutrun, setLogoutrun] = React.useState(false);
   const dispatch = useDispatch();
   const userStore = useSelector((state) => state.user.userAuth);
   console.log("userStore: ", userStore);
@@ -32,19 +33,23 @@ function Navbarmain() {
         onHide={() => setModalShowSignUP(false)}
         user={user}
         setuser={setuser}
+        logoutrun={logoutrun}
+        setLogoutrun={setLogoutrun}
       />
 
       <Navbar key="md" bg="light" expand="md" className="mb-3">
         <Container>
-          <Navbar.Brand href="#">
-            <img
-              src={Logo}
-              alt="Logo"
-              width="70"
-              height="60"
-              className="jumbo-logo"
-            />
-          </Navbar.Brand>
+          <NavLink className="nav-link" to="/">
+            <Navbar.Brand href="#">
+              <img
+                src={Logo}
+                alt="Logo"
+                width="70"
+                height="60"
+                className="jumbo-logo"
+              />
+            </Navbar.Brand>
+          </NavLink>
           <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-md`}
@@ -149,21 +154,43 @@ function Navbarmain() {
                 />
                 <Button variant="outline-success">Buscar</Button>
               </Form>
-              <Button
-                className="ms-2"
-                variant="light"
-                onClick={() => setModalShowSignUP(true)}
-              >
-                {user ? (
-                  <span className="text-secondary">
-                    {user.displayName ? user.displayName : user.email}
-                  </span>
-                ) : (
-                  <span className="text-secondary">
-                    Ingresar <FaUserAlt />
-                  </span>
-                )}
-              </Button>
+
+              {!user && (
+                <Button
+                  className="ms-2"
+                  variant="light"
+                  onClick={() => setModalShowSignUP(true)}
+                >
+                  {
+                    <span className="text-secondary">
+                      <FaUserAlt /> Ingresar
+                    </span>
+                  }
+                </Button>
+              )}
+
+              {user && (
+                <Button className="ms-2" variant="light">
+                  <NavDropdown
+                    title={
+                      <span className="text-secondary">
+                        {user.displayName ? user.displayName : user.email}
+                      </span>
+                    }
+                    id={`offcanvasNavbarDropdown-expand-md`}
+                  >
+                    <NavDropdown.Item href="#action3">
+                      <NavLink className="nav-link" to="/account">
+                        Mi Cuenta
+                      </NavLink>
+                    </NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item onClick={() => setLogoutrun(true)}>
+                      Log Out
+                    </NavDropdown.Item>
+                  </NavDropdown>
+                </Button>
+              )}
             </Offcanvas.Body>
           </Navbar.Offcanvas>
         </Container>
