@@ -38,7 +38,61 @@ export const validatePostForm = (values) => {
     errors.phoneNum = "El telefono de contacto solo debe tener numeros.";
   }
 
-  console.log(values.file);
+  if (!values.Image1) {
+    errors.Image1 = "Requerido";
+  } else if (
+    !(
+      values.Image1.type === "image/png" ||
+      values.Image1.type === "image/jpeg" ||
+      values.Image1.type === "image/jpg"
+    )
+  ) {
+    errors.Image1 = "Debe ser tipo JPG, o PNG.";
+  } else if (values.size < 720 * 720) {
+    errors.Image1 = "Maximo 720 x 720 px";
+  }
+
+  if (!values.Image2) {
+    errors.Image2 = "Requerido";
+  } else if (
+    !(
+      values.Image2.type === "image/png" ||
+      values.Image2.type === "image/jpeg" ||
+      values.Image2.type === "image/jpg"
+    )
+  ) {
+    errors.Image2 = "Debe ser tipo JPG, o NPM.";
+  } else if (values.Image2.size > 720 * 720) {
+    errors.Image2 = "Maximo 720 x 720 px";
+  }
+  if (!values.Image3) {
+    errors.Image3 = "Requerido";
+  } else if (
+    !(
+      values.Image3.type === "image/png" ||
+      values.Image3.type === "image/jpeg" ||
+      values.Image3.type === "image/jpg"
+    )
+  ) {
+    errors.Image3 = "Debe ser tipo JPG, o NPM.";
+  } else if (values.Image3.size > 720 * 720) {
+    errors.Image3 = "Maximo 720 x 720 px";
+  }
+  if (!values.Image4) {
+    errors.Image4 = "Requerido";
+  } else if (
+    !(
+      values.Image4.type === "image/png" ||
+      values.Image4.type === "image/jpeg" ||
+      values.Image4.type === "image/jpg"
+    )
+  ) {
+    errors.Image4 = "Debe ser tipo JPG, o NPM.";
+  } else if (values.Image4.size > 720 * 720) {
+    errors.Image4 = "Maximo 720 x 720 px";
+  }
+
+  console.log("values: ", values.Image4.size);
 
   return errors;
 };

@@ -1,6 +1,6 @@
 import { Button, Label, Col, FormGroup, Input, FormText } from "reactstrap";
 
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Field, Form, ErrorMessage, useFormik } from "formik";
 import { validatePostForm } from "../utils/validatePostForm";
 
 const ContactForm = () => {
@@ -227,6 +227,9 @@ const ContactForm = () => {
               name="file"
               type="file"
               onChange={(e) => console.log(e.currentTarget.files[0])}
+              // onChange={(e) =>
+              //   Formik.setFieldValue("image", e.currentTarget.files[0])
+              // }
             />
             <ErrorMessage name="file">
               {(msg) => <p className="text-danger">{msg}</p>}
