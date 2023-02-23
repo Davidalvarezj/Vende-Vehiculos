@@ -6,6 +6,7 @@ export const sendData = async (Data) => {
   console.log("Sending data to server ...");
   console.log("Data: ", Data);
 
+  Data.PostedDate = new Date();
   const objImg1 = Data.Image1;
   const objImg2 = Data.Image2;
   const objImg3 = Data.Image3;
