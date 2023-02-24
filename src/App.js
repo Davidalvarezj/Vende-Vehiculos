@@ -13,6 +13,7 @@ import MotosScreen from "./pages/MotosScreen";
 import CamionesScreen from "./pages/CamionesScreen";
 import UserAccountScreen from "./pages/UserAccountScreen";
 import PublicarScreen from "./pages/PublicarScreen";
+import VehicleInfoScreen from "./pages/VehicleInfoScreen";
 
 import Footer from "./components/Footer";
 import "./App.css";
@@ -30,6 +31,7 @@ function App() {
         <Route path="camiones" element={<CamionesScreen />} />
         <Route path="account" element={<UserAccountScreen />} />
         <Route path="publicar" element={<PublicarScreen />} />
+        <Route path="/:postId" element={<VehicleInfoScreen />} />
       </Routes>
       <Footer />
     </>

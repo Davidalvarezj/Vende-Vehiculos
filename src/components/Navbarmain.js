@@ -20,7 +20,7 @@ function Navbarmain() {
   const [logoutrun, setLogoutrun] = React.useState(false);
   const dispatch = useDispatch();
   const userStore = useSelector((state) => state.user.userAuth);
-  console.log("userStore Navbar: ", userStore);
+  // console.log("userStore Navbar: ", userStore);
 
   useEffect(() => {
     dispatch(addUser(user));

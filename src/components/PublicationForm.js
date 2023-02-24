@@ -6,10 +6,11 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../firebaseconf";
 import { Formik, Field, Form, ErrorMessage, useFormik } from "formik";
 import { validatePostForm } from "../utils/validatePostForm";
-import { sendData } from "../utils/senddatatoFirestore";
+import { sendData } from "../utils/sendDatatoFirestore";
 import { useEffect, useState } from "react";
+import BeatLoader from "react-spinners/BeatLoader";
 
-const PublicationForm = () => {
+const PublicationForm = ({ loading, setLoading, setModalShow }) => {
   const userStore = useSelector((state) => state.user.userAuth);
   console.log("userStore", userStore);
 
@@ -19,8 +20,14 @@ const PublicationForm = () => {
   const [filesize4, setFilesize4] = useState("");
 
   const handleSubmit = async (data, { resetForm }) => {
+    setModalShow(true);
+    setLoading(true);
     data.Email = userStore.email;
     data.Uid = userStore.uid;
+    data.PostId = "post" + Date.now();
+    data.Price = Number(data.Price);
+    data.Km = Number(data.Km);
+    data.Year = Number(data.Year);
 
     try {
       await sendData(data);
@@ -29,6 +36,7 @@ const PublicationForm = () => {
     }
 
     resetForm();
+    setLoading(false);
   };
 
   return (
@@ -319,30 +327,30 @@ const PublicationForm = () => {
               </Label>
               <Col md="10">
                 <Field as={"select"} className="form-control" name="Year">
-                  <option value="2024">2024</option>
-                  <option value="2023">2023</option>
-                  <option value="2022">2022</option>
-                  <option value="2021">2021</option>
-                  <option value="2020">2020</option>
-                  <option value="2019">2019</option>
-                  <option value="2018">2018</option>
-                  <option value="2017">2017</option>
-                  <option value="2016">2016</option>
-                  <option value="2015">2015</option>
-                  <option value="2014">2014</option>
-                  <option value="2013">2013</option>
-                  <option value="2012">2012</option>
-                  <option value="2011">2011</option>
-                  <option value="2010">2010</option>
-                  <option value="2009">2009</option>
-                  <option value="2008">2008</option>
-                  <option value="2007">2007</option>
-                  <option value="2006">2006 </option>
-                  <option value="2005">2005 </option>
-                  <option value="2004">2004 </option>
-                  <option value="2003">2003 </option>
-                  <option value="2002">2002 </option>
-                  <option value="2001">2001 </option>
+                  <option value={2024}>2024</option>
+                  <option value={2023}>2023</option>
+                  <option value={2022}>2022</option>
+                  <option value={2021}>2021</option>
+                  <option value={2020}>2020</option>
+                  <option value={2019}>2019</option>
+                  <option value={2018}>2018</option>
+                  <option value={2017}>2017</option>
+                  <option value={2016}>2016</option>
+                  <option value={2015}>2015</option>
+                  <option value={2014}>2014</option>
+                  <option value={2013}>2013</option>
+                  <option value={2012}>2012</option>
+                  <option value={2011}>2011</option>
+                  <option value={2010}>2010</option>
+                  <option value={2009}>2009</option>
+                  <option value={2008}>2008</option>
+                  <option value={2007}>2007</option>
+                  <option value={2006}>2006 </option>
+                  <option value={2005}>2005 </option>
+                  <option value={2004}>2004 </option>
+                  <option value={2003}>2003 </option>
+                  <option value={2002}>2002 </option>
+                  <option value={2001}>2001 </option>
                 </Field>
               </Col>
             </FormGroup>
@@ -515,9 +523,20 @@ const PublicationForm = () => {
             </FormGroup>
             <FormGroup row>
               <Col md={{ size: 10, offset: 2 }}>
-                <Button type="submit" color="primary" size="lg">
-                  Publicar Anuncio
-                </Button>
+                <div className="d-flex">
+                  <Button type="submit" color="primary" size="lg">
+                    Publicar Anuncio
+                  </Button>
+                  <BeatLoader
+                    color={"#A6A6A6"}
+                    loading={loading}
+                    size={20}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                    speedMultiplier={0.5}
+                    cssOverride={{ margin: 20, marginLeft: 50 }}
+                  />
+                </div>
               </Col>
             </FormGroup>
           </Form>
