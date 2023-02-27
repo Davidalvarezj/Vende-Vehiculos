@@ -1,0 +1,57 @@
+.icon-km-correction{
+    position: relative;
+    top: -2px;
+}
+
+.image1{
+border-radius: 10px;
+}
+
+.vehicle-side-content{
+    height:max-content;
+    border: 1px solid #D9D9D9;
+    border-radius: 10px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.modalclosebtn{
+    position: absolute;
+    color: rgb(83, 86, 86);
+    border-radius: 100%;
+    width: 50px !important;
+    height: 50px;
+    font-size: 25px;
+    background-color: rgb(255, 255, 255);
+    padding-top: 2px;
+    text-align: center;
+    cursor: pointer;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+  
+}
+
+.imagemodal{
+    width: 800px;
+    height: 600px;
+    object-fit: cover;
+    border-radius: 10px;   
+}
+
+.mousepointer {
+    cursor: pointer;
+}
+
+
+@media (max-width: 640px) {
+    .imagemodal {
+        width: 95vw;
+        height: 70vh;
+
+    }
+    .modalsize{
+        width: 95vw;
+        height: 70vh;
+    }
+}

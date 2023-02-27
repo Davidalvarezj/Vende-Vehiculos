@@ -67,81 +67,139 @@ function Navbarmain() {
                   Publicar
                 </NavLink>
                 <NavDropdown
-                  title="Carros"
+                  title="Autos"
                   id={`offcanvasNavbarDropdown-expand-md`}
                 >
                   <NavDropdown.Item href="#action3">
-                    <NavLink className="nav-link" to="/carros">
+                    <NavLink className="nav-link" to="/search/autos/automovil">
                       Automóvil
                     </NavLink>
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="#action4">Camioneta</NavDropdown.Item>
-                  <NavDropdown.Item href="#action5">Pick-Up</NavDropdown.Item>
+                  <NavDropdown.Item href="#action4">
+                    <NavLink className="nav-link" to="/search/autos/camioneta">
+                      Camioneta
+                    </NavLink>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="#action5">
+                    <NavLink className="nav-link" to="/search/autos/pickup">
+                      Pick-Up
+                    </NavLink>
+                  </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="#action6">
-                    Buscar por Marca
+                    <NavLink className="nav-link" to="/search/autos">
+                      Buscar Autos
+                    </NavLink>
                   </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown
                   title="Motos"
                   id={`offcanvasNavbarDropdown-expand-md`}
                 >
-                  <NavDropdown.Item href="#action7">
-                    {" "}
-                    <NavLink className="nav-link" to="/motos">
+                  <NavDropdown.Item>
+                    <NavLink className="nav-link" to="/search/motos/scooter">
                       Scooter
                     </NavLink>
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="#action8">Calle</NavDropdown.Item>
-                  <NavDropdown.Item href="#action9">Touring</NavDropdown.Item>
-                  <NavDropdown.Item href="#action10">Off-road</NavDropdown.Item>
-                  <NavDropdown.Item href="#action11">
-                    Cuatrimoto
+                  <NavDropdown.Item>
+                    <NavLink className="nav-link" to="/search/motos/calle">
+                      Calle
+                    </NavLink>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <NavLink className="nav-link" to="/search/motos/touring">
+                      Touring
+                    </NavLink>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <NavLink className="nav-link" to="/search/motos/off-road">
+                      Off-road
+                    </NavLink>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <NavLink className="nav-link" to="/search/motos/cuatrimoto">
+                      Cuatrimoto
+                    </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action5">
-                    Buscar por Marca
+                  <NavDropdown.Item>
+                    <NavLink className="nav-link" to="/search/motos">
+                      Buscar Motos
+                    </NavLink>
                   </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown
                   title="Camiones"
                   id={`offcanvasNavbarDropdown-expand-md`}
                 >
-                  <NavDropdown.Item href="#action3">
-                    {" "}
-                    <NavLink className="nav-link" to="/camiones">
+                  <NavDropdown.Item>
+                    <NavLink
+                      className="nav-link"
+                      to="/search/camiones/volquetas"
+                    >
                       Volquetas
                     </NavLink>
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="#action4">Buses</NavDropdown.Item>
-                  <NavDropdown.Item href="#action4">Camiones</NavDropdown.Item>
-                  <NavDropdown.Item href="#action5">
-                    Maquinaria pesada
+                  <NavDropdown.Item>
+                    <NavLink className="nav-link" to="/search/camiones/buses">
+                      Buses
+                    </NavLink>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <NavLink
+                      className="nav-link"
+                      to="/search/camiones/camiones"
+                    >
+                      Camiones
+                    </NavLink>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <NavLink
+                      className="nav-link"
+                      to="/search/camiones/maquinaria"
+                    >
+                      Maquinaria pesada
+                    </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action5">
-                    Buscar por Marca
+                  <NavDropdown.Item>
+                    <NavLink className="nav-link" to="/search/camiones">
+                      Buscar Camiones
+                    </NavLink>
                   </NavDropdown.Item>
                 </NavDropdown>
                 <NavDropdown
                   title="Botes"
                   id={`offcanvasNavbarDropdown-expand-md`}
                 >
-                  <NavDropdown.Item href="#action5">
-                    {" "}
-                    <NavLink className="nav-link" to="/account">
+                  <NavDropdown.Item>
+                    <NavLink className="nav-link" to="/search/botes/yates">
                       Yates
                     </NavLink>
                   </NavDropdown.Item>
-                  <NavDropdown.Item href="#action3">Lanchas</NavDropdown.Item>
-                  <NavDropdown.Item href="#action4">Veleros</NavDropdown.Item>
-                  <NavDropdown.Item href="#action5">
-                    Motos acuaticas
+                  <NavDropdown.Item>
+                    <NavLink className="nav-link" to="/search/botes/lanchas">
+                      Lanchas
+                    </NavLink>
                   </NavDropdown.Item>
-
+                  <NavDropdown.Item>
+                    <NavLink className="nav-link" to="/search/botes/veleros">
+                      Veleros
+                    </NavLink>
+                  </NavDropdown.Item>
+                  <NavDropdown.Item>
+                    <NavLink
+                      className="nav-link"
+                      to="/search/botes/motoacuatica"
+                    >
+                      Motos acuaticas
+                    </NavLink>
+                  </NavDropdown.Item>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action5">
-                    Buscar por Marca
+                  <NavDropdown.Item>
+                    <NavLink className="nav-link" to="/search/botes">
+                      Buscar Botes
+                    </NavLink>
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>

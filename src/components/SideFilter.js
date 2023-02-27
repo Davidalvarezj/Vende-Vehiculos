@@ -3,18 +3,45 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import Botton from "react-bootstrap/Form";
 import { useEffect, useState } from "react";
 import "./SideFilter.css";
 
-const SideFilter = () => {
-  const [VehicleType, setVehicleType] = useState(null);
-  const [Location, setLocation] = useState(null);
-  const [BodyType, setBodyType] = useState(null);
-  const [Brand, setBrand] = useState(null);
-  const [Year, setYear] = useState(null);
+const SideFilter = ({ Data, setDataTemp }) => {
+  const [VehicleType, setVehicleType] = useState("Todos");
+  const [Location, setLocation] = useState("Todos");
+  const [BodyType, setBodyType] = useState("Todos");
+  const [Brand, setBrand] = useState("Todos");
+  const [Year, setYear] = useState("Todos");
   const [Price, setPrice] = useState(0);
   const [Km, setKm] = useState(0);
+
+  function filter_Km(e) {
+    setKm(e.target.value * 2000);
+    const DataFilter = Data.filter((elm) => elm.Km < e.target.value * 2000);
+    setDataTemp(DataFilter);
+  }
+
+  function filter_Price(e) {
+    setPrice(e.target.value * 5000000);
+    const DataFilter = Data.filter(
+      (elm) => elm.Price < e.target.value * 5000000
+    );
+    setDataTemp(DataFilter);
+  }
+
+  function filter_Year(e) {
+    setYear(e.target.value);
+    const DataFilter = Data.filter((elm) => elm.Year == e.target.value);
+    setDataTemp(DataFilter);
+    if (e.target.value == "Todos") setDataTemp(Data);
+  }
+
+  function filter_Location(e) {
+    setLocation(e.target.value);
+    const DataFilter = Data.filter((elm) => elm.Location == e.target.value);
+    setDataTemp(DataFilter);
+    if (e.target.value == "Todos") setDataTemp(Data);
+  }
 
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -27,11 +54,19 @@ const SideFilter = () => {
 
   function handleSummit(e) {
     e.preventDefault();
+    setVehicleType("Todos");
+    setLocation("Todos");
+    setBodyType("Todos");
+    setBrand("Todos");
+    setYear("Todos");
+    setPrice(0);
+    setKm(0);
+    setDataTemp(Data);
   }
 
   return (
-    <div className="container container-main">
-      <div className="row">
+    <div className="container container-main ">
+      <div className="row ">
         <div className="col">
           <div className="">
             <div className="row">
@@ -40,15 +75,14 @@ const SideFilter = () => {
                   <Form.Group
                     as={Col}
                     className="mb-4"
-                    controlId="formHorizontalEmail"
+                    controlId="tipovehiculoID"
                   >
                     <Form.Label column sm={12}>
                       Tipo de vehículo:
                     </Form.Label>
                     <Col sm={12}>
                       <Form.Select
-                        defaultValue={"Todos"}
-                        controlid="tipovehiculoID"
+                        value={VehicleType}
                         onChange={(e) => setVehicleType(e.target.value)}
                       >
                         <option value="Todos">Todos</option>
@@ -59,17 +93,14 @@ const SideFilter = () => {
                       </Form.Select>
                     </Col>
                   </Form.Group>
-                  <Form.Group
-                    as={Col}
-                    className="mb-4"
-                    controlId="formHorizontalEmail"
-                  >
+                  <Form.Group as={Col} className="mb-4" controlId="locationID">
                     <Form.Label column sm={12}>
                       Ubicación:
                     </Form.Label>
                     <Col sm={12}>
                       <Form.Select
-                        onChange={(e) => setLocation(e.target.value)}
+                        value={Location}
+                        onChange={(e) => filter_Location(e)}
                       >
                         <option value="Todos">Todos</option>
                         <option value="Amazonas">Amazonas</option>
@@ -111,17 +142,16 @@ const SideFilter = () => {
                       </Form.Select>
                     </Col>
                   </Form.Group>
-                  <Form.Group
-                    as={Col}
-                    className="mb-4"
-                    controlId="formHorizontalEmail"
-                  >
+                  <Form.Group as={Col} className="mb-4" controlId="brandID">
                     <Form.Label column sm={12}>
                       Marca
                     </Form.Label>
                     <Col sm={12}>
-                      <Form.Select onChange={(e) => setBrand(e.target.value)}>
-                        <option value="Todas">Todos</option>
+                      <Form.Select
+                        value={Brand}
+                        onChange={(e) => setBrand(e.target.value)}
+                      >
+                        <option value="Todos">Todos</option>
                         {VehicleType == "Autos" && (
                           <>
                             <option value="Acura">Acura</option>
@@ -262,16 +292,13 @@ const SideFilter = () => {
                       </Form.Select>
                     </Col>
                   </Form.Group>
-                  <Form.Group
-                    as={Col}
-                    className="mb-4"
-                    controlId="formHorizontalEmail"
-                  >
+                  <Form.Group as={Col} className="mb-4" controlId="bodyID">
                     <Form.Label column sm={12}>
                       Tipo de Carroseria
                     </Form.Label>
                     <Col sm={12}>
                       <Form.Select
+                        value={BodyType}
                         onChange={(e) => setBodyType(e.target.value)}
                       >
                         <option value="Todos">Todos</option>
@@ -314,16 +341,15 @@ const SideFilter = () => {
                       </Form.Select>
                     </Col>
                   </Form.Group>
-                  <Form.Group
-                    as={Col}
-                    className="mb-4"
-                    controlId="formHorizontalEmail"
-                  >
+                  <Form.Group as={Col} className="mb-4" controlId="yearID">
                     <Form.Label column sm={12}>
                       Modelo:
                     </Form.Label>
                     <Col sm={12}>
-                      <Form.Select onChange={(e) => setYear(e.target.value)}>
+                      <Form.Select
+                        value={Year}
+                        onChange={(e) => filter_Year(e)}
+                      >
                         <option value={"Todos"}>Todos</option>
                         <option value={2024}>2024</option>
                         <option value={2023}>2023</option>
@@ -354,21 +380,28 @@ const SideFilter = () => {
                   </Form.Group>
                   <Form.Label>Km: {numberWithCommas(Km)}</Form.Label>
 
-                  <Form.Range onChange={(e) => setKm(e.target.value * 2000)} />
+                  <Form.Range
+                    value={Km / 2000}
+                    onChange={(e) => filter_Km(e)}
+                  />
                   <Form.Label className="mt-2">
                     Precio: {formatter.format(Price)}
                   </Form.Label>
                   <Form.Range
-                    onChange={(e) => setPrice(e.target.value * 5000000)}
+                    value={Price / 5000000}
+                    onChange={async (e) => filter_Price(e)}
                   />
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={(e) => handleSummit(e)}
-                    className="mt-4"
-                  >
-                    Reset
-                  </Button>
+                  <div className="d-grid gap-2">
+                    <Button
+                      variant="secondary"
+                      size="md"
+                      type="submit"
+                      onClick={(e) => handleSummit(e)}
+                      className="mt-4"
+                    >
+                      Reset
+                    </Button>
+                  </div>
                 </Form>
               </div>
             </div>

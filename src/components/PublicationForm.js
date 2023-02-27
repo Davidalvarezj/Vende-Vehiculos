@@ -141,6 +141,7 @@ const PublicationForm = ({ loading, setLoading, setModalShow }) => {
                   )}
                   {formProps.values.VehicleType == "Motos" && (
                     <>
+                      <option value="Scooter">Scooter</option>
                       <option value="Calle">Calle</option>
                       <option value="Touring">Touring</option>
                       <option value="Off-road">Off-road</option>

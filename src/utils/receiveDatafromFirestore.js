@@ -4,14 +4,119 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export const receiveData = async (params) => {
   const Data = [];
+  let DataFilter = [];
   console.log("receiving data from server ...");
   console.log("params: ", params);
 
-  const querySnapshot = await getDocs(collection(db, "Autos"));
-  querySnapshot.forEach((doc) => {
-    Data.push(doc.data());
-  });
-  return Data;
+  if (params == "autos") {
+    const querySnapshot1 = await getDocs(collection(db, "Autos"));
+    querySnapshot1.forEach((doc) => {
+      Data.push(doc.data());
+    });
+    return Data;
+  }
+
+  if (params == "autos/automovil") {
+    console.log("Entro al autos-automovil");
+    let querySnapshot = await getDocs(collection(db, "Autos"));
+    console.log("Respuesta: ", querySnapshot);
+    querySnapshot.forEach((doc) => {
+      Data.push(doc.data());
+      console.log("Respuesta Data ", Data);
+    });
+    DataFilter = Data.filter((elm) => elm.BodyType == "Automovil");
+    return DataFilter;
+  }
+
+  if (params == "autos/camioneta") {
+    const querySnapshot3 = await getDocs(collection(db, "Autos"));
+    querySnapshot3.forEach((doc) => {
+      Data.push(doc.data());
+    });
+    DataFilter = Data.filter((elm) => elm.BodyType == "Camioneta");
+    return DataFilter;
+  }
+
+  if (params == "autos/pickup") {
+    const querySnapshot4 = await getDocs(collection(db, "Autos"));
+    querySnapshot4.forEach((doc) => {
+      Data.push(doc.data());
+    });
+    DataFilter = Data.filter((elm) => elm.BodyType == "Pick-Up");
+    return DataFilter;
+  }
+
+  if (params == "motos") {
+    const querySnapshot5 = await getDocs(collection(db, "Motos"));
+    querySnapshot5.forEach((doc) => {
+      Data.push(doc.data());
+    });
+    return Data;
+  }
+
+  if (params == "motos/scooter") {
+    const querySnapshot6 = await getDocs(collection(db, "Motos"));
+    querySnapshot6.forEach((doc) => {
+      Data.push(doc.data());
+    });
+    DataFilter = Data.filter((elm) => elm.BodyType == "Scooter");
+    return DataFilter;
+  }
+
+  if (params == "motos/calle") {
+    const querySnapshot7 = await getDocs(collection(db, "Motos"));
+    querySnapshot7.forEach((doc) => {
+      Data.push(doc.data());
+    });
+    DataFilter = Data.filter((elm) => elm.BodyType == "Calle");
+    return DataFilter;
+  }
+
+  if (params == "motos/touring") {
+    const querySnapshot8 = await getDocs(collection(db, "Motos"));
+    querySnapshot8.forEach((doc) => {
+      Data.push(doc.data());
+    });
+    DataFilter = Data.filter((elm) => elm.BodyType == "Touring");
+    return DataFilter;
+  }
+  if (params == "motos/off-road") {
+    const querySnapshot9 = await getDocs(collection(db, "Motos"));
+    querySnapshot9.forEach((doc) => {
+      Data.push(doc.data());
+    });
+    DataFilter = Data.filter((elm) => elm.BodyType == "Off-road");
+    return DataFilter;
+  }
+  if (params == "motos/cuatrimoto") {
+    const querySnapshot10 = await getDocs(collection(db, "Motos"));
+    querySnapshot10.forEach((doc) => {
+      Data.push(doc.data());
+    });
+    DataFilter = Data.filter((elm) => elm.BodyType == "Cuatrimoto");
+    return DataFilter;
+  }
+
+  // if (params == "all") {
+  //   const querySnapshot1 = await getDocs(collection(db, "Autos"));
+  //   querySnapshot1.forEach((doc) => {
+  //     Data.push(doc.data());
+  //   });
+  //   const querySnapshot2 = await getDocs(collection(db, "Autos"));
+  //   querySnapshot2.forEach((doc) => {
+  //     Data.push(doc.data());
+  //   });
+  //   const querySnapshot3 = await getDocs(collection(db, "Autos"));
+  //   querySnapshot3.forEach((doc) => {
+  //     Data.push(doc.data());
+  //   });
+  //   const querySnapshot4 = await getDocs(collection(db, "Autos"));
+  //   querySnapshot4.forEach((doc) => {
+  //     Data.push(doc.data());
+  //   });
+
+  //   return Data;
+  // }
 };
 
 export const fakedata = [
@@ -62,7 +167,7 @@ export const fakedata = [
     Reference: "Acura XXX",
     Uid: "HeEGjO6w3hUVO6MQiKOPk2BlOPK2",
     VehicleType: "Autos",
-    Year: 2010,
+    Year: 2011,
     phoneNum: "9548172840",
     PostId: "1234655",
   },
@@ -87,7 +192,7 @@ export const fakedata = [
     Reference: "Acura XXX",
     Uid: "HeEGjO6w3hUVO6MQiKOPk2BlOPK2",
     VehicleType: "Autos",
-    Year: 2010,
+    Year: 2011,
     phoneNum: "9548172840",
     PostId: "1277346",
   },

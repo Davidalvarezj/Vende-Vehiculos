@@ -16,10 +16,13 @@ import { FaMotorcycle } from "react-icons/fa";
 import { ImTruck } from "react-icons/im";
 import { GiSailboat } from "react-icons/gi";
 
-import "./CarsScreen.css";
+import "./SearchScreen.css";
 
-export default function CarsScreen() {
+export default function SearchScreen({ tabsearch }) {
+  console.log("tabsearch: ", tabsearch);
+
   const [Data, setData] = useState([]);
+  const [DataTemp, setDataTemp] = useState([]);
   let navigate = useNavigate();
 
   const formatter = new Intl.NumberFormat("en-US", {
@@ -40,29 +43,38 @@ export default function CarsScreen() {
     async function fetchData() {
       console.log("useEffect asking for data...");
       try {
-        // const response = await receiveData("PARAMETRO");
+        let response = await receiveData(tabsearch);
 
-        console.log("response: ", fakedata);
-        setData(fakedata);
+        console.log("response: ", response);
+        setData(response);
+        setDataTemp(response);
       } catch (error) {
         console.log("Hay un Error Recepcion de Base de Datos: ", error);
       }
     }
     fetchData();
-  }, []);
+  }, [tabsearch]);
 
   return (
     <>
+      <p>{tabsearch}</p>
       <div className="container main-content">
         <div className="row g-1">
           <div className="col-12 col-md-3">
-            <SideFilter />
+            <SideFilter Data={Data} setDataTemp={setDataTemp} />
           </div>
-          <div className="col-12 col-md-9">
+          <div className="col-12 col-md-9 mt-3">
+            <h4 className="results-tag">
+              Resultados:{" "}
+              <span className="results-span"> {DataTemp.length} </span>
+            </h4>
             <Row xs={1} md={3} className="g-3">
-              {Data.map((elm, index) => (
+              {DataTemp.map((elm, index) => (
                 <Col key={index}>
-                  <Card>
+                  <Card
+                    className={"mousepointer"}
+                    onClick={() => handleNewRoute(elm)}
+                  >
                     <Card.Img
                       variant="top"
                       src={elm.Image1}
@@ -70,7 +82,7 @@ export default function CarsScreen() {
                       style={{ objectFit: "cover" }}
                     />
 
-                    <Card.Body onClick={() => handleNewRoute(elm)}>
+                    <Card.Body>
                       <Card.Title>
                         <div className="d-flex cardtittle">
                           <p className="year-tag">{elm.Year}</p>
