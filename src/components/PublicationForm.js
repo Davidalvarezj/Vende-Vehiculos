@@ -145,6 +145,7 @@ const PublicationForm = ({ loading, setLoading, setModalShow }) => {
                       <option value="Calle">Calle</option>
                       <option value="Touring">Touring</option>
                       <option value="Off-road">Off-road</option>
+                      <option value="Scooter">Scooter</option>
                       <option value="Cuatrimoto">Cuatrimoto</option>
                       <option value="Otro">Otro</option>
                     </>
@@ -186,6 +187,7 @@ const PublicationForm = ({ loading, setLoading, setModalShow }) => {
                       <option value="Cadillac">Cadillac</option>
                       <option value="Chevrolet">Chevrolet</option>
                       <option value="Dodge">Dodge</option>
+                      <option value="Ferrari">Ferrari</option>
                       <option value="Fiat">Fiat</option>
                       <option value="Ford">Ford</option>
                       <option value="Gmc">Gmc</option>
@@ -193,6 +195,7 @@ const PublicationForm = ({ loading, setLoading, setModalShow }) => {
                       <option value="Jaguar">Jaguar</option>
                       <option value="Jeep">Jeep</option>
                       <option value="Kia">Kia</option>
+                      <option value="Lamborghini">Lamborghini</option>
                       <option value="Land Rover">Land Rover</option>
                       <option value="Lexus">Lexus</option>
                       <option value="Mazda">Mazda</option>
@@ -200,8 +203,9 @@ const PublicationForm = ({ loading, setLoading, setModalShow }) => {
                       <option value="Mini">Mini </option>
                       <option value="Mitsubishi">Mitsubishi </option>
                       <option value="Nissan">Nissan </option>
-                      <option value="Porche">Porche </option>
+                      <option value="Porsche">Porsche </option>
                       <option value="Subaru">Subaru </option>
+                      <option value="Tesla">Tesla </option>
                       <option value="Toyota">Toyota </option>
                       <option value="Volkswagen">Volkswagen </option>
                       <option value="Volvo">Volvo </option>

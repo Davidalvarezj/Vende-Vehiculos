@@ -6,43 +6,79 @@ import Row from "react-bootstrap/Row";
 import { useEffect, useState } from "react";
 import "./SideFilter.css";
 
-const SideFilter = ({ Data, setDataTemp }) => {
-  const [VehicleType, setVehicleType] = useState("Todos");
-  const [Location, setLocation] = useState("Todos");
-  const [BodyType, setBodyType] = useState("Todos");
-  const [Brand, setBrand] = useState("Todos");
-  const [Year, setYear] = useState("Todos");
-  const [Price, setPrice] = useState(0);
-  const [Km, setKm] = useState(0);
+const SideFilter = ({
+  Data,
+  DataTemp,
+  setDataTemp,
+  VehicleType,
+  setVehicleType,
+  BodyType,
+  setBodyType,
+  ResetFilter,
+  setResetFilter,
+  Location,
+  setLocation,
+  Brand,
+  setBrand,
+  Year,
+  setYear,
+  Price,
+  setPrice,
+  Km,
+  setKm,
+  handleVehicleType,
+}) => {
+  const [runfilter, setrunfilter] = useState(false);
 
-  function filter_Km(e) {
-    setKm(e.target.value * 2000);
-    const DataFilter = Data.filter((elm) => elm.Km < e.target.value * 2000);
-    setDataTemp(DataFilter);
+  useEffect(() => {
+    setrunfilter(true);
+  }, [Location, Brand, BodyType, Year, Km, Price]);
+  useEffect(() => {
+    handleVehicleType(VehicleType);
+  }, [VehicleType]);
+
+  if (runfilter) {
+    setrunfilter(false);
+    filter_Km();
+    filter_Price();
+    filter_Year();
+    filter_Location();
+    filter_Brand();
+    filter_BodyType();
   }
 
-  function filter_Price(e) {
-    setPrice(e.target.value * 5000000);
-    const DataFilter = Data.filter(
-      (elm) => elm.Price < e.target.value * 5000000
-    );
+  function filter_Km() {
+    const DataFilter = Data.filter((elm) => elm.Km < Km);
     setDataTemp(DataFilter);
   }
-
-  function filter_Year(e) {
-    setYear(e.target.value);
-    const DataFilter = Data.filter((elm) => elm.Year == e.target.value);
+  function filter_Price() {
+    const DataFilter = Data.filter((elm) => elm.Price < Price);
     setDataTemp(DataFilter);
-    if (e.target.value == "Todos") setDataTemp(Data);
   }
-
-  function filter_Location(e) {
-    setLocation(e.target.value);
-    const DataFilter = Data.filter((elm) => elm.Location == e.target.value);
-    setDataTemp(DataFilter);
-    if (e.target.value == "Todos") setDataTemp(Data);
+  function filter_Year() {
+    if (Year != "Todos") {
+      const DataFilter = Data.filter((elm) => elm.Year == Year);
+      setDataTemp(DataFilter);
+    }
   }
-
+  function filter_Location() {
+    if (Location != "Todos") {
+      const DataFilter = Data.filter((elm) => elm.Location == Location);
+      setDataTemp(DataFilter);
+    }
+  }
+  function filter_Brand() {
+    if (Brand != "Todos") {
+      const DataFilter = Data.filter((elm) => elm.Brand == Brand);
+      setDataTemp(DataFilter);
+    }
+  }
+  function filter_BodyType() {
+    if (BodyType != "Todos") {
+      const DataFilter = Data.filter((elm) => elm.BodyType == BodyType);
+      setDataTemp(DataFilter);
+    }
+  }
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -52,15 +88,20 @@ const SideFilter = ({ Data, setDataTemp }) => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
+  if (ResetFilter) {
+    setResetFilter(false);
+    handleSummit();
+  }
+
   function handleSummit(e) {
-    e.preventDefault();
+    e?.preventDefault();
     setVehicleType("Todos");
     setLocation("Todos");
     setBodyType("Todos");
     setBrand("Todos");
     setYear("Todos");
-    setPrice(0);
-    setKm(0);
+    setPrice(500000000);
+    setKm(200000);
     setDataTemp(Data);
   }
 
@@ -100,7 +141,7 @@ const SideFilter = ({ Data, setDataTemp }) => {
                     <Col sm={12}>
                       <Form.Select
                         value={Location}
-                        onChange={(e) => filter_Location(e)}
+                        onChange={(e) => setLocation(e.target.value)}
                       >
                         <option value="Todos">Todos</option>
                         <option value="Amazonas">Amazonas</option>
@@ -161,6 +202,7 @@ const SideFilter = ({ Data, setDataTemp }) => {
                             <option value="Cadillac">Cadillac</option>
                             <option value="Chevrolet">Chevrolet</option>
                             <option value="Dodge">Dodge</option>
+                            <option value="Ferrari">Ferrari</option>
                             <option value="Fiat">Fiat</option>
                             <option value="Ford">Ford</option>
                             <option value="Gmc">Gmc</option>
@@ -168,6 +210,7 @@ const SideFilter = ({ Data, setDataTemp }) => {
                             <option value="Jaguar">Jaguar</option>
                             <option value="Jeep">Jeep</option>
                             <option value="Kia">Kia</option>
+                            <option value="Lamborghini">Lamborghini</option>
                             <option value="Land Rover">Land Rover</option>
                             <option value="Lexus">Lexus</option>
                             <option value="Mazda">Mazda</option>
@@ -175,8 +218,9 @@ const SideFilter = ({ Data, setDataTemp }) => {
                             <option value="Mini">Mini </option>
                             <option value="Mitsubishi">Mitsubishi </option>
                             <option value="Nissan">Nissan </option>
-                            <option value="Porche">Porche </option>
+                            <option value="Porsche">Porsche </option>
                             <option value="Subaru">Subaru </option>
+                            <option value="Tesla">Tesla </option>
                             <option value="Toyota">Toyota </option>
                             <option value="Volkswagen">Volkswagen </option>
                             <option value="Volvo">Volvo </option>
@@ -316,6 +360,7 @@ const SideFilter = ({ Data, setDataTemp }) => {
                             <option value="Touring">Touring</option>
                             <option value="Off-road">Off-road</option>
                             <option value="Cuatrimoto">Cuatrimoto</option>
+                            <option value="Scooter">Scooter</option>
                             <option value="Otro">Otro</option>
                           </>
                         )}
@@ -348,7 +393,7 @@ const SideFilter = ({ Data, setDataTemp }) => {
                     <Col sm={12}>
                       <Form.Select
                         value={Year}
-                        onChange={(e) => filter_Year(e)}
+                        onChange={(e) => setYear(e.target.value)}
                       >
                         <option value={"Todos"}>Todos</option>
                         <option value={2024}>2024</option>
@@ -382,14 +427,14 @@ const SideFilter = ({ Data, setDataTemp }) => {
 
                   <Form.Range
                     value={Km / 2000}
-                    onChange={(e) => filter_Km(e)}
+                    onChange={(e) => setKm(e.target.value * 2000)}
                   />
                   <Form.Label className="mt-2">
                     Precio: {formatter.format(Price)}
                   </Form.Label>
                   <Form.Range
                     value={Price / 5000000}
-                    onChange={async (e) => filter_Price(e)}
+                    onChange={(e) => setPrice(e.target.value * 5000000)}
                   />
                   <div className="d-grid gap-2">
                     <Button

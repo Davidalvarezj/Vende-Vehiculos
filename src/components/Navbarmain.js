@@ -133,14 +133,6 @@ function Navbarmain() {
                   id={`offcanvasNavbarDropdown-expand-md`}
                 >
                   <NavDropdown.Item>
-                    <NavLink
-                      className="nav-link"
-                      to="/search/camiones/volquetas"
-                    >
-                      Volquetas
-                    </NavLink>
-                  </NavDropdown.Item>
-                  <NavDropdown.Item>
                     <NavLink className="nav-link" to="/search/camiones/buses">
                       Buses
                     </NavLink>
