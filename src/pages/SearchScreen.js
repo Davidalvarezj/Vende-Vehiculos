@@ -4,8 +4,8 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import SideFilter from "../components/SideFilter";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { receiveData, fakedata } from "../utils/receiveDatafromFirestore";
+import { useNavigate, useLocation, useParams, useHref } from "react-router-dom";
+import { receiveData, SearchData } from "../utils/receiveDatafromFirestore";
 import { useEffect, useState } from "react";
 import { IoLocationOutline } from "react-icons/io5";
 import { IoPricetagOutline } from "react-icons/io5";
@@ -29,9 +29,13 @@ export default function SearchScreen({ tabsearch }) {
   const [Year, setYear] = useState("Todos");
   const [Price, setPrice] = useState(500000000);
   const [Km, setKm] = useState(200000);
-  const [trigger, setTrigger] = useState(false);
 
   let navigate = useNavigate();
+  let { keyId } = useParams();
+  console.log("keyId", keyId);
+  if (keyId) tabsearch = tabsearch + "/" + keyId;
+
+  // if (searchKey) fetchKeyData(searchKey);
 
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -49,7 +53,7 @@ export default function SearchScreen({ tabsearch }) {
 
   function handleVehicleType(item) {
     console.log("Entro al useffect cambio de Vehicle Type");
-    fetchData(item.toLowerCase());
+    navigate(`/search/${item}`);
   }
 
   async function fetchData(param) {
@@ -58,99 +62,118 @@ export default function SearchScreen({ tabsearch }) {
       console.log("response: ", response);
       setData(response);
       setDataTemp(response);
+      clearSearchfilters(param);
+      console.log("cambio body type", param);
+    } catch (error) {
+      console.log("Hay un Error Recepcion de Base de Datos: ", error);
+    }
+  }
+
+  async function fetchKeyData(param) {
+    try {
+      let response = await SearchData(param);
+      console.log("response Key Search: ", param);
+      setData(response);
+      setDataTemp(response);
+      clearSearchfilters("Todos");
     } catch (error) {
       console.log("Hay un Error Recepcion de Base de Datos: ", error);
     }
   }
 
   useEffect(() => {
-    console.log("Entro al useffect del Tab-navigation...");
-    // fetchData(tabsearch);
-    setTrigger(true);
+    if (!keyId) {
+      console.log("Entro al useffect del Tab-navigation...");
+      fetchData(tabsearch);
+    } else {
+      fetchKeyData(keyId);
+    }
   }, [tabsearch]);
 
-  if (trigger) {
-    setTrigger(false);
+  function clearSearchfilters(key) {
     setLocation("Todos");
     setBrand("Todos");
     setYear("Todos");
     setKm(200000);
     setPrice(500000000);
-    if (tabsearch == "autos") {
+    if (key == "Todos") {
+      setVehicleType("Todos");
+    }
+    if (key == "autos") {
       setVehicleType("Autos");
       setBodyType("Todos");
     }
-    if (tabsearch == "motos") {
+    if (key == "motos") {
       setVehicleType("Motos");
       setBodyType("Todos");
     }
-    if (tabsearch == "camiones") {
+    if (key == "camiones") {
       setVehicleType("Camiones");
       setBodyType("Todos");
     }
-    if (tabsearch == "botes") {
+    if (key == "botes") {
       setVehicleType("Botes");
       setBodyType("Todos");
     }
 
-    if (tabsearch == "autos/automovil") {
+    if (key == "autos/automovil") {
       setVehicleType("Autos");
       setBodyType("Automovil");
     }
-    if (tabsearch == "autos/camioneta") {
+    if (key == "autos/camioneta") {
       setVehicleType("Autos");
       setBodyType("Camioneta");
     }
-    if (tabsearch == "autos/pickup") {
+    if (key == "autos/pickup") {
       setVehicleType("Autos");
       setBodyType("Pick-Up");
     }
 
-    if (tabsearch == "motos/scooter") {
+    if (key == "motos/scooter") {
       setVehicleType("Motos");
       setBodyType("Scooter");
     }
-    if (tabsearch == "motos/calle") {
+    if (key == "motos/calle") {
       setVehicleType("Motos");
       setBodyType("Calle");
     }
-    if (tabsearch == "motos/touring") {
+    if (key == "motos/touring") {
       setVehicleType("Motos");
       setBodyType("Touring");
     }
-    if (tabsearch == "motos/off-road") {
+    if (key == "motos/off-road") {
       setVehicleType("Motos");
       setBodyType("Off-road");
     }
-    if (tabsearch == "motos/cuatrimoto") {
+    if (key == "motos/cuatrimoto") {
       setVehicleType("Motos");
       setBodyType("Cuatrimoto");
     }
-    if (tabsearch == "camiones/buses") {
+    if (key == "camiones/buses") {
       setVehicleType("Camiones");
       setBodyType("Bus");
     }
-    if (tabsearch == "camiones/camiones") {
+    if (key == "camiones/camiones") {
       setVehicleType("Camiones");
       setBodyType("Camion");
     }
-    if (tabsearch == "camiones/maquinaria") {
+    if (key == "camiones/maquinaria") {
       setVehicleType("Camiones");
       setBodyType("Maquinaria pesada");
     }
-    if (tabsearch == "botes/yates") {
+    if (key == "botes/yates") {
       setVehicleType("Botes");
       setBodyType("Yate");
     }
-    if (tabsearch == "botes/lanchas") {
+    if (key == "botes/lanchas") {
       setVehicleType("Botes");
       setBodyType("Lancha");
     }
-    if (tabsearch == "botes/veleros") {
+    if (key == "botes/veleros") {
       setVehicleType("Botes");
       setBodyType("Velero");
     }
-    if (tabsearch == "botes/motoacuatica") {
+    if (key == "botes/motoacuatica") {
       setVehicleType("Botes");
       setBodyType("Moto acuatica");
     }
@@ -158,7 +181,7 @@ export default function SearchScreen({ tabsearch }) {
 
   return (
     <>
-      <p>{tabsearch}</p>
+      {/* <p>{tabsearch}</p> */}
       <div className="container main-content">
         <div className="row g-1">
           <div className="col-12 col-md-3">
@@ -186,6 +209,12 @@ export default function SearchScreen({ tabsearch }) {
             />
           </div>
           <div className="col-12 col-md-9 mt-3">
+            {keyId && (
+              <h4 className="results-tag">
+                Busqueda: <span className="results-span"> {keyId} </span>
+              </h4>
+            )}
+
             <h4 className="results-tag">
               Resultados:{" "}
               <span className="results-span"> {DataTemp?.length} </span>
@@ -194,7 +223,7 @@ export default function SearchScreen({ tabsearch }) {
               {DataTemp?.map((elm, index) => (
                 <Col key={index}>
                   <Card
-                    className={"mousepointer"}
+                    className={"card-vehicle"}
                     onClick={() => handleNewRoute(elm)}
                   >
                     <Card.Img

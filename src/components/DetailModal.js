@@ -32,7 +32,7 @@ function Example(args) {
     },
     {
       src: vehicle.Image4,
-      key: 3,
+      key: 4,
     },
   ];
 

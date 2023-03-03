@@ -7,13 +7,11 @@ import React from "react";
 import Jumbo from "./components/Jumbo";
 import Navbarmain from "./components/Navbarmain";
 import SideFilter from "./components/SideFilter";
-import HomeScreen from "./pages/HomeScreen";
 import SearchScreen from "./pages/SearchScreen";
-import MotosScreen from "./pages/MotosScreen";
-import CamionesScreen from "./pages/CamionesScreen";
 import UserAccountScreen from "./pages/UserAccountScreen";
 import PublicarScreen from "./pages/PublicarScreen";
 import VehicleInfoScreen from "./pages/VehicleInfoScreen";
+import HomeScreen from "./pages/HomeScreen";
 
 import Footer from "./components/Footer";
 import "./App.css";
@@ -29,8 +27,15 @@ function App() {
         <Route path="account" element={<UserAccountScreen />} />
         <Route path="publicar" element={<PublicarScreen />} />
         <Route path="/:postId" element={<VehicleInfoScreen />} />
-        <Route path="/search" element={<SearchScreen tabsearch="all" />} />
+        <Route
+          path="/key/:keyId"
+          element={<SearchScreen tabsearch={"key"} />}
+        />
         <>
+          <Route
+            path="/search/todos"
+            element={<SearchScreen tabsearch="todos" />}
+          />
           <Route
             path="/search/autos"
             element={<SearchScreen tabsearch="autos" />}

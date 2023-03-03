@@ -20,27 +20,27 @@ const formatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0,
 });
 function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return x?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 const VehicleInfoScreen = () => {
   const { state } = useLocation();
-  const vehicle = state.item;
+  const vehicle = state?.item;
 
   const [modal, setModal] = useState(false);
 
   return (
     <div className="container mt-5">
       <div className="row mb-4">
-        <h5 className="results-tag mb-3">{vehicle.VehicleType}</h5>
-        <h2>{vehicle.Reference}</h2>
+        <h5 className="results-tag mb-3">{vehicle?.VehicleType}</h5>
+        <h2>{vehicle?.Reference}</h2>
         <div className="d-flex ">
           <p className="me-2">Modelo:</p>
-          <p className="year-tag ">{vehicle.Year}</p> <p className="ms-1">|</p>
+          <p className="year-tag ">{vehicle?.Year}</p> <p className="ms-1">|</p>
           <h5 className="ms-3 icon-km-correction">
             <IoSpeedometerOutline />
           </h5>
-          <p className="ms-2">{numberWithCommas(vehicle.Km) + " km"}</p>
+          <p className="ms-2">{numberWithCommas(vehicle?.Km) + " km"}</p>
         </div>
       </div>
       <div className="row ">
@@ -51,8 +51,8 @@ const VehicleInfoScreen = () => {
           <div className="row mb-3">
             <div className="col">
               <img
-                className="image1 img-fluid"
-                src={vehicle.Image1}
+                className="imagebg img-fluid"
+                src={vehicle?.Image1}
                 alt="Image 1"
               />
             </div>
@@ -61,21 +61,21 @@ const VehicleInfoScreen = () => {
             <div className="col-12 col-md-4">
               <img
                 className="image1 img-fluid"
-                src={vehicle.Image2}
+                src={vehicle?.Image2}
                 alt="Image 1"
               />
             </div>
             <div className="col-12 col-md-4">
               <img
                 className="image1 img-fluid"
-                src={vehicle.Image3}
+                src={vehicle?.Image3}
                 alt="Image 1"
               />
             </div>
             <div className="col-12 col-md-4">
               <img
                 className="image1 img-fluid"
-                src={vehicle.Image4}
+                src={vehicle?.Image4}
                 alt="Image 1"
               />
             </div>

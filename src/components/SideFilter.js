@@ -31,54 +31,54 @@ const SideFilter = ({
   const [runfilter, setrunfilter] = useState(false);
 
   useEffect(() => {
-    setrunfilter(true);
+    runfilters();
   }, [Location, Brand, BodyType, Year, Km, Price]);
-  useEffect(() => {
-    handleVehicleType(VehicleType);
-  }, [VehicleType]);
 
-  if (runfilter) {
-    setrunfilter(false);
-    filter_Km();
-    filter_Price();
-    filter_Year();
-    filter_Location();
-    filter_Brand();
-    filter_BodyType();
-  }
-
-  function filter_Km() {
-    const DataFilter = Data.filter((elm) => elm.Km < Km);
-    setDataTemp(DataFilter);
-  }
-  function filter_Price() {
-    const DataFilter = Data.filter((elm) => elm.Price < Price);
-    setDataTemp(DataFilter);
-  }
-  function filter_Year() {
-    if (Year != "Todos") {
-      const DataFilter = Data.filter((elm) => elm.Year == Year);
-      setDataTemp(DataFilter);
-    }
-  }
-  function filter_Location() {
-    if (Location != "Todos") {
-      const DataFilter = Data.filter((elm) => elm.Location == Location);
-      setDataTemp(DataFilter);
-    }
-  }
-  function filter_Brand() {
-    if (Brand != "Todos") {
-      const DataFilter = Data.filter((elm) => elm.Brand == Brand);
-      setDataTemp(DataFilter);
-    }
+  function runfilters() {
+    const arrayFilter1 = filter_BodyType();
+    const arrayFilter2 = filter_Year(arrayFilter1);
+    const arrayFilter3 = filter_Km(arrayFilter2);
+    const arrayFilter4 = filter_Price(arrayFilter3);
+    const arrayFilter5 = filter_Location(arrayFilter4);
+    const arrayFilter6 = filter_Brand(arrayFilter5);
+    setDataTemp(arrayFilter6);
   }
   function filter_BodyType() {
     if (BodyType != "Todos") {
-      const DataFilter = Data.filter((elm) => elm.BodyType == BodyType);
-      setDataTemp(DataFilter);
+      return Data?.filter((elm) => elm.BodyType == BodyType);
+    } else {
+      return Data;
     }
   }
+  function filter_Year(arr) {
+    if (Year != "Todos") {
+      return arr?.filter((elm) => elm.Year == Year);
+    } else {
+      return arr;
+    }
+  }
+  function filter_Km(arr) {
+    return arr?.filter((elm) => elm.Km < Km);
+  }
+  function filter_Price(arr) {
+    return arr?.filter((elm) => elm.Price < Price);
+  }
+
+  function filter_Location(arr) {
+    if (Location != "Todos") {
+      return arr?.filter((elm) => elm.Location == Location);
+    } else {
+      return arr;
+    }
+  }
+  function filter_Brand(arr) {
+    if (Brand != "Todos") {
+      return arr?.filter((elm) => elm.Brand == Brand);
+    } else {
+      return arr;
+    }
+  }
+
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "USD",
@@ -124,7 +124,11 @@ const SideFilter = ({
                     <Col sm={12}>
                       <Form.Select
                         value={VehicleType}
-                        onChange={(e) => setVehicleType(e.target.value)}
+                        onChange={(e) => {
+                          setVehicleType(e.target.value);
+                          handleVehicleType(e.target.value);
+                          handleSummit();
+                        }}
                       >
                         <option value="Todos">Todos</option>
                         <option value="Autos">Autos</option>

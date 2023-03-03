@@ -11,20 +11,32 @@ import { addUser } from "../features/userSlice";
 import { useEffect } from "react";
 import Logo from "../img/Logo3.png";
 import { FaUserAlt } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import SignUpModal from "./signin-modals/SignUpModal";
+import { SearchData } from "../utils/receiveDatafromFirestore";
 
 function Navbarmain() {
   const [modalShowSignUP, setModalShowSignUP] = React.useState(false);
   const [user, setuser] = React.useState({});
   const [logoutrun, setLogoutrun] = React.useState(false);
+  const [searchKey, setsearchKey] = React.useState("");
   const dispatch = useDispatch();
   const userStore = useSelector((state) => state.user.userAuth);
   // console.log("userStore Navbar: ", userStore);
+  let navigate = useNavigate();
 
   useEffect(() => {
     dispatch(addUser(user));
   }, [user]);
+
+  const handdlesearch = async () => {
+    console.log("Search key", searchKey);
+    // let SearchResponse = await SearchData(searchKey);
+    // console.log("SearchResponse ", SearchResponse);
+    let upercasekey = searchKey.charAt(0).toUpperCase() + searchKey.slice(1);
+    setsearchKey("");
+    navigate(`/key/${upercasekey}`, { state: { upercasekey } });
+  };
 
   return (
     <>
@@ -37,15 +49,15 @@ function Navbarmain() {
         setLogoutrun={setLogoutrun}
       />
 
-      <Navbar key="md" bg="light" expand="md" className="mb-3">
-        <Container>
+      <Navbar key="md" bg="" expand="md" className="mb-3 navcontainer">
+        <Container className="mt-2 mb-2">
           <NavLink className="nav-link" to="/">
             <Navbar.Brand href="#">
               <img
                 src={Logo}
                 alt="Logo"
-                width="70"
-                height="60"
+                width="45"
+                height="40"
                 className="jumbo-logo"
               />
             </Navbar.Brand>
@@ -198,11 +210,15 @@ function Navbarmain() {
               <Form className="d-flex">
                 <Form.Control
                   type="search"
-                  placeholder="Search..."
+                  placeholder="Buscar..."
                   className="me-2"
                   aria-label="Search"
+                  value={searchKey}
+                  onChange={(e) => setsearchKey(e.target.value)}
                 />
-                <Button variant="outline-success">Buscar</Button>
+                <Button variant="outline-success" onClick={handdlesearch}>
+                  Buscar
+                </Button>
               </Form>
 
               {!user && (

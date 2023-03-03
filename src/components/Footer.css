@@ -1,19 +1,26 @@
 .footer-main {
     color: white;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url("../img/bgcars.jpeg");
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url("../img/footerrelax.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    background-position:center;
+    background-position:bottom;
     text-shadow: 2px 2px 4px #000000;
     /* box-shadow: -0px -100px 100px  10px rgba(0, 0, 0, 0.5) inset; */
-    height: 600px;
-    box-shadow: 0px 0px 200px 200px rgba(0, 0, 0, 0.0);
-    margin-top: 20px;
-
+    height: 460px;
+    box-shadow: 0px 0px 200px 200px rgba(222, 216, 208, 0.2);
+    margin-top: 200px;
 }
 
+.footer-social{
+    font-size: 50px;
+    margin-top: 50px;
+
+}
+.text-footer-link{
+    cursor: pointer;
+}
 .row-footer {
-    padding-top: 60px !important;
+   margin-top: 100px;
 }
 
 @media (max-width: 640px) {
@@ -24,7 +31,5 @@
     .jumbo-main {
 /* box-shadow: -0px -100px 100px  10px rgba(0, 0, 0, 0.5) inset; */
         height: 60vh;
-
-
     }
 }

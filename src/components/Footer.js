@@ -1,35 +1,40 @@
 import React from "react";
 import Logo from "../img/Logo3.png";
 import { Container, Row, Col } from "react-bootstrap";
+import { FaFacebookSquare } from "react-icons/fa";
+import { TfiYoutube } from "react-icons/tfi";
+import { FiInstagram } from "react-icons/fi";
+import { FaTwitterSquare } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+
 import "./Footer.css";
 
 const Footer = () => {
+  let navigate = useNavigate();
+
   return (
-    <div className={"jumbotron-fluid footer-main pt-5 pb-5"} id="nosotros">
+    <div className={"jumbotron-fluid footer-main pt-5 pb-5"}>
       <Container className="">
-        <div className="row row-jumbo">
-          <Col xs="12" md="7" className="mb-5 offset-1">
-            <h2 className="m-0">Encuentra el Vehiculo de tus Sueños!</h2>
-            <span className="text-primary h1">_______</span>
-            <div className="row mt-3">
-              <div className="col-5 ">
-                <p className="fst-italic text-white mb-5 fs-5"></p>
-              </div>
+        <div className="row row-footer">
+          <div className="col text-center">
+            <div className="footer-social">
+              <FaFacebookSquare className="m-2" />
+              <TfiYoutube className="m-2" />
+              <FiInstagram className="m-2" />
+              <FaTwitterSquare className="m-2" />
             </div>
-          </Col>
-          <div className="col-6 col-md-4 text-center">
-            <div className="d-flex justify-content-center mb-2 d-none d-sm-block">
-              <img
-                src={Logo}
-                alt="Logo"
-                width="180"
-                height="150"
-                className="jumbo-logo"
-              />
-              <p className="text-primary mb-5 fs-5">vendevehiculos.com</p>
-            </div>
-            <h3 className="m-0"></h3>
           </div>
+        </div>
+        <div className="row row-footer-end mt-2">
+          <h2
+            className="text-center text-footer-link"
+            onClick={() => {
+              navigate(`/`);
+              window.scrollTo(0, 0);
+            }}
+          >
+            www.vendevehiculos.com
+          </h2>
         </div>
       </Container>
     </div>
