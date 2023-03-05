@@ -216,7 +216,7 @@ function Navbarmain() {
                   value={searchKey}
                   onChange={(e) => setsearchKey(e.target.value)}
                 />
-                <Button variant="outline-success" onClick={handdlesearch}>
+                <Button variant="success" onClick={handdlesearch}>
                   Buscar
                 </Button>
               </Form>
