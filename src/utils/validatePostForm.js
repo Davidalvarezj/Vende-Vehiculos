@@ -30,8 +30,8 @@ export const validatePostForm = (values) => {
     errors.Contactname = "Maximo 25 caracteres";
   }
 
-  if (values.Description.length > 200) {
-    errors.Description = "Maximo 200 caracteres";
+  if (values.Description.length > 800) {
+    errors.Description = "Maximo 800 caracteres";
   }
 
   if (!reg.test(values.phoneNum)) {
@@ -48,8 +48,8 @@ export const validatePostForm = (values) => {
     )
   ) {
     errors.Image1 = "Debe ser tipo JPG, o PNG.";
-  } else if (values.Image1.size > 720 * 720) {
-    errors.Image1 = "Maximo 720 x 720 px";
+  } else if (values.Image1.size > 800 * 800) {
+    errors.Image1 = "Maximo 5.0 Mb";
   }
 
   if (!values.Image2) {
@@ -62,8 +62,8 @@ export const validatePostForm = (values) => {
     )
   ) {
     errors.Image2 = "Debe ser tipo JPG, o PNG.";
-  } else if (values.Image2.size > 720 * 720) {
-    errors.Image2 = "Maximo 720 x 720 px";
+  } else if (values.Image2.size > 800 * 800) {
+    errors.Image2 = "Maximo 5.0 Mb";
   }
   if (!values.Image3) {
     errors.Image3 = "Requerido";
@@ -75,8 +75,8 @@ export const validatePostForm = (values) => {
     )
   ) {
     errors.Image3 = "Debe ser tipo JPG, o PNG.";
-  } else if (values.Image3.size > 720 * 720) {
-    errors.Image3 = "Maximo 720 x 720 px";
+  } else if (values.Image3.size > 800 * 800) {
+    errors.Image3 = "Maximo 5.0 Mb";
   }
   if (!values.Image4) {
     errors.Image4 = "Requerido";
@@ -88,8 +88,8 @@ export const validatePostForm = (values) => {
     )
   ) {
     errors.Image4 = "Debe ser tipo JPG, o PNG.";
-  } else if (values.Image4.size > 720 * 720) {
-    errors.Image4 = "Maximo 720 x 720 px";
+  } else if (values.Image4.size > 800 * 800) {
+    errors.Image4 = "Maximo 5.0 Mb";
   }
 
   console.log("values: ", values.Image4.size);

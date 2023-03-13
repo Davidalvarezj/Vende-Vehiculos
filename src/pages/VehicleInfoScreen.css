@@ -63,4 +63,14 @@ object-fit: cover;
         width: 95vw;
         height: 70vh;
     }
+
+    .image1 {
+        width: 120px;
+        height: 90px;
+    
+    }
+    .small-images{
+        margin-bottom: 50px;
+    }
+
 }

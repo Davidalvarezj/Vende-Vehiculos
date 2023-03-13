@@ -4,6 +4,9 @@
     margin-right: 10px;
     padding: 4px;
     border-radius: 5px;
+    text-align: center;
+    align-self: center;
+  
 
 }
 
@@ -57,4 +60,12 @@ font-size: 16px;
 .results-span{
     font-size: 14px;
         color: #737373
+}
+
+
+@media (max-width: 640px) {
+    .remove-tag-movile {
+        display: none !important;
+    }
+
 }

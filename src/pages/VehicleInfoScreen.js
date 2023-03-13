@@ -57,22 +57,22 @@ const VehicleInfoScreen = () => {
               />
             </div>
           </div>
-          <div className="row d-none d-md-flex">
-            <div className="col-12 col-md-4">
+          <div className="row d-flex small-images">
+            <div className="col-4 col-md-4">
               <img
                 className="image1 img-fluid"
                 src={vehicle?.Image2}
                 alt="Image 1"
               />
             </div>
-            <div className="col-12 col-md-4">
+            <div className="col-4 col-md-4">
               <img
                 className="image1 img-fluid"
                 src={vehicle?.Image3}
                 alt="Image 1"
               />
             </div>
-            <div className="col-12 col-md-4">
+            <div className="col-4 col-md-4">
               <img
                 className="image1 img-fluid"
                 src={vehicle?.Image4}

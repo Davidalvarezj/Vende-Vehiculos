@@ -101,7 +101,7 @@ const UserAccountScreen = () => {
           <h4 className="mt-5 mb-5">Mis Publicaciones</h4>
 
           <div className="col-12">
-            <Row xs={1} md={4} className="g-4">
+            <Row xs={2} md={4} className="g-4">
               {PostedVehicles?.map((elm, index) => (
                 <Col key={index}>
                   <Card className={"card-vehicle"}>

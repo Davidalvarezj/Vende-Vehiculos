@@ -20,6 +20,7 @@ function Navbarmain() {
   const [user, setuser] = React.useState({});
   const [logoutrun, setLogoutrun] = React.useState(false);
   const [searchKey, setsearchKey] = React.useState("");
+  const [show, setShow] = React.useState(false);
   const dispatch = useDispatch();
   const userStore = useSelector((state) => state.user.userAuth);
   // console.log("userStore Navbar: ", userStore);
@@ -36,7 +37,11 @@ function Navbarmain() {
     let upercasekey = searchKey.charAt(0).toUpperCase() + searchKey.slice(1);
     setsearchKey("");
     navigate(`/key/${upercasekey}`, { state: { upercasekey } });
+    handleClose();
   };
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <>
@@ -62,11 +67,16 @@ function Navbarmain() {
               />
             </Navbar.Brand>
           </NavLink>
-          <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
+          <Navbar.Toggle
+            aria-controls={`offcanvasNavbar-expand-md`}
+            onClick={handleShow}
+          />
           <Navbar.Offcanvas
             id={`offcanvasNavbar-expand-md`}
             aria-labelledby={`offcanvasNavbarLabel-expand-md`}
             placement="end"
+            show={show}
+            onHide={handleClose}
           >
             <Offcanvas.Header closeButton>
               <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
@@ -75,7 +85,11 @@ function Navbarmain() {
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Nav className="justify-content-end flex-grow-1 pe-3">
-                <NavLink className="nav-link" to="/publicar">
+                <NavLink
+                  className="nav-link"
+                  to="/publicar"
+                  onClick={handleClose}
+                >
                   Publicar
                 </NavLink>
                 <NavDropdown
@@ -83,23 +97,39 @@ function Navbarmain() {
                   id={`offcanvasNavbarDropdown-expand-md`}
                 >
                   <NavDropdown.Item href="#action3">
-                    <NavLink className="nav-link" to="/search/autos/automovil">
+                    <NavLink
+                      className="nav-link"
+                      to="/search/autos/automovil"
+                      onClick={handleClose}
+                    >
                       Automóvil
                     </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action4">
-                    <NavLink className="nav-link" to="/search/autos/camioneta">
+                    <NavLink
+                      className="nav-link"
+                      to="/search/autos/camioneta"
+                      onClick={handleClose}
+                    >
                       Camioneta
                     </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Item href="#action5">
-                    <NavLink className="nav-link" to="/search/autos/pickup">
+                    <NavLink
+                      className="nav-link"
+                      to="/search/autos/pickup"
+                      onClick={handleClose}
+                    >
                       Pick-Up
                     </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item href="#action6">
-                    <NavLink className="nav-link" to="/search/autos">
+                    <NavLink
+                      className="nav-link"
+                      to="/search/autos"
+                      onClick={handleClose}
+                    >
                       Buscar Autos
                     </NavLink>
                   </NavDropdown.Item>
@@ -109,33 +139,57 @@ function Navbarmain() {
                   id={`offcanvasNavbarDropdown-expand-md`}
                 >
                   <NavDropdown.Item>
-                    <NavLink className="nav-link" to="/search/motos/scooter">
+                    <NavLink
+                      className="nav-link"
+                      to="/search/motos/scooter"
+                      onClick={handleClose}
+                    >
                       Scooter
                     </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                    <NavLink className="nav-link" to="/search/motos/calle">
+                    <NavLink
+                      className="nav-link"
+                      to="/search/motos/calle"
+                      onClick={handleClose}
+                    >
                       Calle
                     </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                    <NavLink className="nav-link" to="/search/motos/touring">
+                    <NavLink
+                      className="nav-link"
+                      to="/search/motos/touring"
+                      onClick={handleClose}
+                    >
                       Touring
                     </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                    <NavLink className="nav-link" to="/search/motos/off-road">
+                    <NavLink
+                      className="nav-link"
+                      to="/search/motos/off-road"
+                      onClick={handleClose}
+                    >
                       Off-road
                     </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                    <NavLink className="nav-link" to="/search/motos/cuatrimoto">
+                    <NavLink
+                      className="nav-link"
+                      to="/search/motos/cuatrimoto"
+                      onClick={handleClose}
+                    >
                       Cuatrimoto
                     </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item>
-                    <NavLink className="nav-link" to="/search/motos">
+                    <NavLink
+                      className="nav-link"
+                      to="/search/motos"
+                      onClick={handleClose}
+                    >
                       Buscar Motos
                     </NavLink>
                   </NavDropdown.Item>
@@ -145,7 +199,11 @@ function Navbarmain() {
                   id={`offcanvasNavbarDropdown-expand-md`}
                 >
                   <NavDropdown.Item>
-                    <NavLink className="nav-link" to="/search/camiones/buses">
+                    <NavLink
+                      className="nav-link"
+                      to="/search/camiones/buses"
+                      onClick={handleClose}
+                    >
                       Buses
                     </NavLink>
                   </NavDropdown.Item>
@@ -153,6 +211,7 @@ function Navbarmain() {
                     <NavLink
                       className="nav-link"
                       to="/search/camiones/camiones"
+                      onClick={handleClose}
                     >
                       Camiones
                     </NavLink>
@@ -161,13 +220,18 @@ function Navbarmain() {
                     <NavLink
                       className="nav-link"
                       to="/search/camiones/maquinaria"
+                      onClick={handleClose}
                     >
                       Maquinaria pesada
                     </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item>
-                    <NavLink className="nav-link" to="/search/camiones">
+                    <NavLink
+                      className="nav-link"
+                      to="/search/camiones"
+                      onClick={handleClose}
+                    >
                       Buscar Camiones
                     </NavLink>
                   </NavDropdown.Item>
@@ -177,17 +241,29 @@ function Navbarmain() {
                   id={`offcanvasNavbarDropdown-expand-md`}
                 >
                   <NavDropdown.Item>
-                    <NavLink className="nav-link" to="/search/botes/yates">
+                    <NavLink
+                      className="nav-link"
+                      to="/search/botes/yates"
+                      onClick={handleClose}
+                    >
                       Yates
                     </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                    <NavLink className="nav-link" to="/search/botes/lanchas">
+                    <NavLink
+                      className="nav-link"
+                      to="/search/botes/lanchas"
+                      onClick={handleClose}
+                    >
                       Lanchas
                     </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Item>
-                    <NavLink className="nav-link" to="/search/botes/veleros">
+                    <NavLink
+                      className="nav-link"
+                      to="/search/botes/veleros"
+                      onClick={handleClose}
+                    >
                       Veleros
                     </NavLink>
                   </NavDropdown.Item>
@@ -195,13 +271,18 @@ function Navbarmain() {
                     <NavLink
                       className="nav-link"
                       to="/search/botes/motoacuatica"
+                      onClick={handleClose}
                     >
                       Motos acuaticas
                     </NavLink>
                   </NavDropdown.Item>
                   <NavDropdown.Divider />
                   <NavDropdown.Item>
-                    <NavLink className="nav-link" to="/search/botes">
+                    <NavLink
+                      className="nav-link"
+                      to="/search/botes"
+                      onClick={handleClose}
+                    >
                       Buscar Botes
                     </NavLink>
                   </NavDropdown.Item>
@@ -246,7 +327,11 @@ function Navbarmain() {
                     id={`offcanvasNavbarDropdown-expand-md`}
                   >
                     <NavDropdown.Item href="#action3">
-                      <NavLink className="nav-link" to="/account">
+                      <NavLink
+                        className="nav-link"
+                        to="/account"
+                        onClick={handleClose}
+                      >
                         Mi Cuenta
                       </NavLink>
                     </NavDropdown.Item>

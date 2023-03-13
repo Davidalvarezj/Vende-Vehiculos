@@ -10,3 +10,10 @@
    
 }
 
+
+@media (max-width: 640px) {
+    .container-main {
+        display: none;
+    }
+
+}

@@ -9,7 +9,9 @@ const Jumbo = () => {
       <Container className="">
         <div className="row row-jumbo justify-content-center">
           <Col xs="12" md="7" className="mb-5 offset-1">
-            <h2 className="m-0 mt-5">Encuentra el Vehiculo de tus Sueños!</h2>
+            <h2 className="m-0 mt-5 header-h2">
+              Encuentra el Vehiculo de tus Sueños!
+            </h2>
             <span className="text-primary h4">___________</span>
             <div className="row mt-3">
               <div className="col-6 ">

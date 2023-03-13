@@ -219,7 +219,7 @@ export default function SearchScreen({ tabsearch }) {
               Resultados:{" "}
               <span className="results-span"> {DataTemp?.length} </span>
             </h4>
-            <Row xs={1} md={3} className="g-3">
+            <Row xs={2} md={3} className="g-3">
               {DataTemp?.map((elm, index) => (
                 <Col key={index}>
                   <Card
@@ -262,7 +262,7 @@ export default function SearchScreen({ tabsearch }) {
                           {numberWithCommas(elm.Km) + " km"}
                         </p>
                       </div>
-                      <div className="other-tag d-flex ">
+                      <div className="other-tag d-flex remove-tag-movile">
                         <h5>
                           <TbClipboardText />
                         </h5>
@@ -270,7 +270,7 @@ export default function SearchScreen({ tabsearch }) {
                       </div>
 
                       {elm.VehicleType == "Autos" ? (
-                        <div className="other-tag d-flex">
+                        <div className="other-tag d-flex remove-tag-movile">
                           <h5>
                             <FaCar />
                           </h5>
@@ -278,7 +278,7 @@ export default function SearchScreen({ tabsearch }) {
                         </div>
                       ) : null}
                       {elm.VehicleType == "Motos" ? (
-                        <div className="other-tag d-flex">
+                        <div className="other-tag d-flex remove-tag-movile">
                           <h5>
                             <FaMotorcycle />
                           </h5>
@@ -286,7 +286,7 @@ export default function SearchScreen({ tabsearch }) {
                         </div>
                       ) : null}
                       {elm.VehicleType == "Camiones" ? (
-                        <div className="other-tag d-flex">
+                        <div className="other-tag d-flex remove-tag-movile">
                           <h5>
                             <ImTruck />
                           </h5>
@@ -294,7 +294,7 @@ export default function SearchScreen({ tabsearch }) {
                         </div>
                       ) : null}
                       {elm.VehicleType == "Botes" ? (
-                        <div className="other-tag d-flex">
+                        <div className="other-tag d-flex remove-tag-movile">
                           <h5>
                             <GiSailboat />
                           </h5>

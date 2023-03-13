@@ -32,4 +32,11 @@
 /* box-shadow: -0px -100px 100px  10px rgba(0, 0, 0, 0.5) inset; */
         height: 60vh;
     }
+
+    .footer-main{
+        height: 300px;
+    }
+    .row-footer{
+margin-top: 20px;
+    }
 }

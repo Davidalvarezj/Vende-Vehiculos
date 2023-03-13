@@ -55,7 +55,7 @@ const HomeScreen = () => {
           <h4 className="mt-5 mb-5">Ultimas Publicaciones</h4>
 
           <div className="col-12">
-            <Row xs={1} md={4} className="g-4">
+            <Row xs={2} md={4} className="g-4">
               {HomeData?.map((elm, index) => (
                 <Col key={index}>
                   <Card
@@ -98,7 +98,7 @@ const HomeScreen = () => {
                           {numberWithCommas(elm.Km) + " km"}
                         </p>
                       </div>
-                      <div className="other-tag d-flex ">
+                      <div className="other-tag d-flex remove-tag-movile">
                         <h5>
                           <TbClipboardText />
                         </h5>
@@ -106,7 +106,7 @@ const HomeScreen = () => {
                       </div>
 
                       {elm.VehicleType == "Autos" ? (
-                        <div className="other-tag d-flex">
+                        <div className="other-tag d-flex remove-tag-movile">
                           <h5>
                             <FaCar />
                           </h5>
@@ -114,7 +114,7 @@ const HomeScreen = () => {
                         </div>
                       ) : null}
                       {elm.VehicleType == "Motos" ? (
-                        <div className="other-tag d-flex">
+                        <div className="other-tag d-flex remove-tag-movile">
                           <h5>
                             <FaMotorcycle />
                           </h5>
@@ -122,7 +122,7 @@ const HomeScreen = () => {
                         </div>
                       ) : null}
                       {elm.VehicleType == "Camiones" ? (
-                        <div className="other-tag d-flex">
+                        <div className="other-tag d-flex remove-tag-movile">
                           <h5>
                             <ImTruck />
                           </h5>
@@ -130,7 +130,7 @@ const HomeScreen = () => {
                         </div>
                       ) : null}
                       {elm.VehicleType == "Botes" ? (
-                        <div className="other-tag d-flex">
+                        <div className="other-tag d-flex remove-tag-movile">
                           <h5>
                             <GiSailboat />
                           </h5>

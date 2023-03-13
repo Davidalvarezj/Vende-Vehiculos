@@ -28,8 +28,13 @@
     }
     .jumbo-main {
 /* box-shadow: -0px -100px 100px  10px rgba(0, 0, 0, 0.5) inset; */
-        height: 30vh;
+        height: 20vh;
 
-
+    }
+    .header-h2{
+        margin-top: 0 !important;
+    }
+    .jumbo-main{
+        padding-top: 20px !important;
     }
 }

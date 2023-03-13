@@ -452,7 +452,7 @@ const PublicationForm = ({ loading, setLoading, setModalShow }) => {
                     setFilesize1(e.target.files[0].size);
                   }}
                 />
-                {filesize1 > 518000 && (
+                {filesize1 > 640000 && (
                   <FormText color="danger">File size: {filesize1}</FormText>
                 )}
                 <ErrorMessage name="Image1">
@@ -474,7 +474,7 @@ const PublicationForm = ({ loading, setLoading, setModalShow }) => {
                     setFilesize2(e.target.files[0].size);
                   }}
                 />
-                {filesize2 > 518000 && (
+                {filesize2 > 640000 && (
                   <FormText color="danger">File size: {filesize2}</FormText>
                 )}
                 <ErrorMessage name="Image2">
@@ -496,7 +496,7 @@ const PublicationForm = ({ loading, setLoading, setModalShow }) => {
                     setFilesize3(e.target.files[0].size);
                   }}
                 />
-                {filesize3 > 518000 && (
+                {filesize3 > 640000 && (
                   <FormText color="danger">File size: {filesize3}</FormText>
                 )}
                 <ErrorMessage name="Image3">
@@ -518,7 +518,7 @@ const PublicationForm = ({ loading, setLoading, setModalShow }) => {
                     setFilesize4(e.target.files[0].size);
                   }}
                 />
-                {filesize4 > 518000 && (
+                {filesize4 > 640000 && (
                   <FormText color="danger">File size: {filesize4}</FormText>
                 )}
                 <ErrorMessage name="Image4">
