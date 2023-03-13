@@ -11,8 +11,8 @@ Bulid with REACT and google Firebase.
 
 ###Screenshots
 
-![](https://github.com/Davidalvarezj/Vende-Vehiculos/src/img/vendevehiculos1.jpg)
-![](https://github.com/Davidalvarezj/Vende-Vehiculos/src/img/vendevehiculos2.jpg)
-![](https://github.com/Davidalvarezj/Vende-Vehiculos/src/img/vendevehiculos3.jpg)
+![Alt text1](./src/img/vendevehiculos1.jpg)
+![Alt text2](./src/img/vendevehiculos2.jpg)
+![Alt text3](./src/img/vendevehiculos3.jpg)
 
 ###End
